@@ -1,37 +1,14 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+require("@babel/register");
+const webpackMerge = require("webpack-merge");
 
-module.exports = {
-  entry: "./src/",
-  output: {
-    path: path.resolve("dist"),
-    filename: "bundle.js",
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: [/node_modules/],
-        use: {
-          loader: "babel-loader",
-        },
-      },
-      {
-        test: /\.s?css$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.(mp4|mp3|png|jpg|gif|jpeg)$/,
-        use: {
-          loader: "file-loader",
-        },
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html",
-    }),
-  ],
+const common = require("./webpack-config/webpack.common.babel");
+
+const envs = {
+  development: "dev",
+  production: "prod",
 };
+
+/* eslint-disable global-require,import/no-dynamic-require */
+const env = envs[process.env.NODE_ENV || "development"];
+const envConfig = require(`./webpack-config/webpack.${env}.babel`);
+module.exports = webpackMerge(common, envConfig);
