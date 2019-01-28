@@ -9,11 +9,11 @@ module.exports = {
   module: {
     rules,
   },
-  // resolve: {
-  //   // library를 땡겨올 때 먼저 찾는 루트 설정
-  //   modules: ["modules"],
-  //   extensions: ["*", ".js", ".scss", ".css"],
-  // },
+  resolve: {
+    // library를 땡겨올 때 먼저 찾는 루트 설정
+    modules: [paths.root + "src", "node_modules"],
+    extensions: ["*", ".js", ".scss", ".css"],
+  },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
