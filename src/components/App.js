@@ -1,10 +1,21 @@
 import React from "react";
+import { observer } from "mobx-react";
 
-const style = require("./App.scss");
+import store from "../store/Todo";
 
-console.log("================style: ", style);
 const App = () => {
-  return <h1>React Template</h1>;
+  return (
+    <div>
+      {store.getTodo}
+      <button
+        onClick={() => {
+          store.addTodo("test");
+        }}
+      >
+        추가
+      </button>
+    </div>
+  );
 };
 
-export default App;
+export default observer(App);

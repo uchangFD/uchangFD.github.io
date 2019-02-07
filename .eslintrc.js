@@ -20,5 +20,7 @@ module.exports = {
     "prefer-template": 0,
     "no-unused-expressions": 0,
     "no-underscore-dangle": 0,
+    "react/prefer-stateless-function": 0,
+    experimentalDecorators: true,
   },
 };
